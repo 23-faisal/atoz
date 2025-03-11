@@ -2,8 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 import { IoBagOutline } from "react-icons/io5";
-import { IoSearch } from "react-icons/io5";
 import { CgMenuRight } from "react-icons/cg";
+import SearchBar from "./SearchBar";
 
 const Navbar = () => {
   return (
@@ -59,9 +59,10 @@ const Navbar = () => {
         </button>
 
         {/* search */}
-        <button className="">
-          <IoSearch className="h-6 w-6 text-slate-700 " />
-        </button>
+
+        <div className="overflow-hidden">
+          <SearchBar />
+        </div>
 
         {/* hamburger icon */}
         <button className="md:hidden">
