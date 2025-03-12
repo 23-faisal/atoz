@@ -933,6 +933,10 @@ const products = [
         url: "https://picsum.photos/500/500?random=36",
         altText: "Ruffle-Sleeve Blouse",
       },
+      {
+        url: "https://picsum.photos/500/500?random=35",
+        altText: "Ribbed Long-Sleeve Top",
+      },
     ],
     rating: 4.5,
     numReviews: 19,
@@ -957,6 +961,10 @@ const products = [
         url: "https://picsum.photos/500/500?random=37",
         altText: "Classic Button-Up Shirt",
       },
+      {
+        url: "https://picsum.photos/500/500?random=32",
+        altText: "Off-Shoulder Top",
+      },
     ],
     rating: 4.8,
     numReviews: 25,
@@ -980,6 +988,10 @@ const products = [
       {
         url: "https://picsum.photos/500/500?random=38",
         altText: "V-Neck Wrap Top",
+      },
+      {
+        url: "https://picsum.photos/500/500?random=28",
+        altText: "Classic Pleated Trousers Front View",
       },
     ],
     rating: 4.7,
