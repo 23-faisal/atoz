@@ -1,3 +1,4 @@
+import CartDrawer from "../Layout/CartDrawer";
 import TopBar from "../Layout/TopBar";
 import Navbar from "./Navbar";
 
@@ -11,6 +12,7 @@ const Header = () => {
       <Navbar />
 
       {/* Cart Drawer */}
+       
     </div>
   );
 };
