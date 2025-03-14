@@ -10,7 +10,7 @@ const UserLayout = () => {
       <Header />
 
       {/* Main content */}
-      <main className="flex flex-grow">
+      <main className="">
         <Outlet />
       </main>
 
