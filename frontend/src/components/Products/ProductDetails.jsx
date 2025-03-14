@@ -1,15 +1,46 @@
 import products from "@/data/products";
 import { Button } from "../ui/button";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { toast } from "sonner";
 
 const ProductDetails = () => {
   const [mainImage, setMainImage] = useState("");
   const [selectedSize, setSelectedSize] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
   const [quantity, setQuantity] = useState(1);
-  const [isButtonDisable, setisButtonDisable] = useState(false);
+  const [isButtonDisable, setIsButtonDisable] = useState(false);
 
   const selectedProducts = products.slice(-1)[0];
+
+  const handleQuantityChange = (action) => {
+    if (action === "plus") {
+      setQuantity((prev) => prev + 1);
+    }
+    if (action === "minus" && quantity > 1) {
+      setQuantity((prev) => prev - 1);
+    }
+  };
+
+  const handleAddToCart = (e) => {
+    e.preventDefault();
+    if (!selectedColor || !selectedSize) {
+      toast.error(
+        "Please select a size and a color before adding to the cart",
+        {
+          duration: 2000,
+        }
+      );
+      return;
+    }
+    setIsButtonDisable(true);
+
+    setTimeout(() => {
+      toast.success("Product added to the cart successfully!", {
+        duration: 2000,
+      });
+      setIsButtonDisable(false);
+    }, 1000);
+  };
 
   return (
     <div className="container mx-auto  mt-10 ">
@@ -80,11 +111,15 @@ const ProductDetails = () => {
             <div className="flex gap-2 mt-2">
               {selectedProducts.colors.map((color) => (
                 <button
+                  onClick={() => setSelectedColor(color)}
                   key={color}
-                  className="h-8 w-8 rounded-full "
+                  className={`h-8 w-8 rounded-full border ${
+                    selectedColor === color
+                      ? "border-4 border-[#33d9b2]"
+                      : "border-gray-300"
+                  }`}
                   style={{
                     backgroundColor: color.toLowerCase(),
-                    filter: "brightness(0.5)",
                   }}
                 ></button>
               ))}
@@ -96,7 +131,13 @@ const ProductDetails = () => {
               <p className="text-slate-700 ">Sizes: </p>
               <div className="flex gap-2 mt-2">
                 {selectedProducts.sizes.map((size) => (
-                  <button key={size} className="h-8 w-8 rounded  border ">
+                  <button
+                    onClick={() => setSelectedSize(size)}
+                    key={size}
+                    className={` h-8 w-8 rounded  border  ${
+                      selectedSize === size && "bg-slate-700 text-white "
+                    }  `}
+                  >
                     {size}
                   </button>
                 ))}
@@ -109,19 +150,33 @@ const ProductDetails = () => {
               <p className="text-slate-700 ">Quantity: </p>
 
               <div className="flex items-center space-x-4 mt-2 ">
-                <button className="h-8 w-8 rounded bg-slate-200 text-lg   border ">
+                <button
+                  onClick={() => handleQuantityChange("minus")}
+                  className={`h-8 w-8 rounded bg-slate-200 text-lg   border   ${
+                    quantity < 2 ? "opacity-50 cursor-not-allowed" : ""
+                  }`}
+                >
                   -
                 </button>
-                <span className="text-lg ">{1}</span>
-                <button className="h-8 w-8 rounded bg-slate-200 text-lg   border ">
+                <span className="text-lg ">{quantity}</span>
+                <button
+                  onClick={() => handleQuantityChange("plus")}
+                  className="h-8 w-8 rounded bg-slate-200 text-lg   border "
+                >
                   +
                 </button>
               </div>
             </div>
 
             {/*  */}
-            <Button className="w-full py-1 text-md mb-4 uppercase">
-              Add to Cart
+            <Button
+              onClick={handleAddToCart}
+              disabled={isButtonDisable}
+              className={` w-full py-1 text-md mb-4 uppercase ${
+                isButtonDisable ? " cursor-not-allowed" : ""
+              }`}
+            >
+              {isButtonDisable ? "Adding..." : "Add to Cart"}
             </Button>
 
             {/*  */}

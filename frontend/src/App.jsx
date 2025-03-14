@@ -2,6 +2,7 @@ import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import UserLayout from "./components/Layout/UserLayout";
 import HomePage from "./pages/HomePage";
+import { Toaster } from "./components/ui/sonner";
 
 function App() {
   return (
@@ -16,6 +17,8 @@ function App() {
           {/* admin layout */}
           <Route></Route>
         </Routes>
+
+        <Toaster position="top-right" />
       </Router>
     </>
   );
