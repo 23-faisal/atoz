@@ -1,4 +1,6 @@
 import Hero from "@/components/Layout/Hero";
+import FeaturedCollection from "@/components/Products/FeaturedCollection";
+import FeatureSection from "@/components/Products/FeatureSection";
 import GenderBasedCollection from "@/components/Products/GenderBasedCollection";
 import NewArrivals from "@/components/Products/NewArrivals";
 import ProductDetails from "@/components/Products/ProductDetails";
@@ -28,6 +30,9 @@ const HomePage = () => {
         </h2>
         <ProductGrid products={womenProduct} />
       </div>
+
+      <FeaturedCollection />
+      <FeatureSection />
     </div>
   );
 };

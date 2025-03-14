@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 
 const ProductGrid = ({ products }) => {
-  return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+  return ( 
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 my-10">
       {products?.map((product, index) => (
         <Link to={`/product/${product.name}`} key={index}>
           <div className="bg-white p-4 rounded-lg ">
