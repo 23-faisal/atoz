@@ -7,7 +7,7 @@ import { Toaster } from "./components/ui/sonner";
 function App() {
   return (
     <>
-      <Router>
+      <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <Routes>
           {/* user layout */}
           <Route path="/" element={<UserLayout />}>
