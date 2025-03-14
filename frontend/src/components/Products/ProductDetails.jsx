@@ -2,6 +2,7 @@ import products from "@/data/products";
 import { Button } from "../ui/button";
 import { useState } from "react";
 import { toast } from "sonner";
+import ProductGrid from "./ProductGrid";
 
 const ProductDetails = () => {
   const [mainImage, setMainImage] = useState("");
@@ -11,6 +12,7 @@ const ProductDetails = () => {
   const [isButtonDisable, setIsButtonDisable] = useState(false);
 
   const selectedProducts = products.slice(-1)[0];
+  const similarProduct = products.slice(0, 4);
 
   const handleQuantityChange = (action) => {
     if (action === "plus") {
@@ -199,9 +201,17 @@ const ProductDetails = () => {
             {/*  */}
           </div>
         </div>
-
-        {/*  */}
       </div>
+      {/* You may also like */}
+
+      <div className="mt-20">
+        <h2 className="text-2xl text-center font-medium mb-2 ">
+          You may also like
+        </h2>
+        <ProductGrid products={similarProduct} />
+      </div>
+
+      {/*  */}
     </div>
   );
 };
