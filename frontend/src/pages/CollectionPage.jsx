@@ -15,11 +15,10 @@ const CollectionPage = () => {
 
   
   return (
-    <div className="flex flex-col lg:flex-row   ">
-      {/* Mobile filter button */}
+    <div className="flex flex-col lg:flex-row container mx-auto">
+      
 
       {/* filter sidebar  */}
-
 
       <div >
         <FilterSidebar />

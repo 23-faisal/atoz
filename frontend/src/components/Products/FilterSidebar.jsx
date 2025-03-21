@@ -99,7 +99,7 @@ const FilterSidebar = () => {
     <>
       {/* Mobile Filter Button */}
       <div className="lg:hidden flex justify-center my-4">
-        <Button variant="outline" className="flex items-center space-x-2" onClick={() => setOpen(!open)}>
+        <Button variant="outline" className="flex items-center  mx-2 w-full bg-slate-50 " onClick={() => setOpen(!open)}>
           <FaFilter />
           <span>Filters</span>
         </Button>
@@ -117,7 +117,7 @@ const FilterSidebar = () => {
       {/* Filter Sidebar (Mobile & Desktop) */}
       <div
         ref={sidebarRef}
-        className={`fixed top-0 left-0 w-64 h-full bg-white shadow-lg z-50 transform transition-transform duration-300 lg:relative lg:translate-x-0 ${
+        className={`fixed top-0 left-0 w-64 h-full bg-white  z-50 transform transition-transform duration-300 lg:relative lg:translate-x-0 ${
           open ? "translate-x-0" : "-translate-x-full"
         } lg:block overflow-y-auto`}
       >
