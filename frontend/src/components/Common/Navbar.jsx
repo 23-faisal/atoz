@@ -30,7 +30,7 @@ const Navbar = () => {
         {/* center - Navigation Links */}
         <div className="hidden md:flex space-x-6">
           <Link
-            to="/"
+            to="/collections/all"
             className="text-slate-700 hover:text-black text-sm font-medium uppercase"
           >
             Men
@@ -101,11 +101,13 @@ const Navbar = () => {
 
         {/* nav menu  */}
         <div className=" ">
-          <h2 className="text-xl font-semibold mb-4 border-b-2 pl-4 pb-4 ">Menu</h2>
+          <h2 className="text-xl font-semibold mb-4 border-b-2 pl-4 pb-4 ">
+            Menu
+          </h2>
           <nav className="space-y-4 p-4  ">
             <Link
               onClick={mobileNavbarToggle}
-              to="/"
+              to="/collections/all"
               className="uppercase  block text-slate-700 "
             >
               MEN
