@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import products from "@/data/products";
 import SortOptions from "@/components/Products/SortOptions";
 import ProductGrid from "@/components/Products/ProductGrid";
-import FilterSidebarMobile from "@/components/Products/FilterSidebarMobile";
 import FilterSidebar from "@/components/Products/FilterSidebar";
 
 const CollectionPage = () => {
