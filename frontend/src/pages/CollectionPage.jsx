@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import products from "@/data/products";
 import SortOptions from "@/components/Products/SortOptions";
 import ProductGrid from "@/components/Products/ProductGrid";
 import FilterSidebar from "@/components/Products/FilterSidebar";
+import products from "@/data/products";
 
 const CollectionPage = () => {
   const [collectionProduct, setCollectionProduct] = useState([]);
@@ -13,14 +13,11 @@ const CollectionPage = () => {
     }, 1000);
   }, []);
 
-  
   return (
     <div className="flex flex-col lg:flex-row container mx-auto">
-      
-
       {/* filter sidebar  */}
 
-      <div >
+      <div>
         <FilterSidebar />
       </div>
 

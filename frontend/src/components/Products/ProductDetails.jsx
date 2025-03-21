@@ -1,18 +1,29 @@
-import products from "@/data/products";
-import { Button } from "../ui/button";
 import { useState } from "react";
+import { useParams } from "react-router-dom"; // Import useParams hook
 import { toast } from "sonner";
+import products from "@/data/products"; // Your products data
+import { Button } from "../ui/button"; // Assuming Button is a component in your UI library
 import ProductGrid from "./ProductGrid";
 
 const ProductDetails = () => {
-  const [mainImage, setMainImage] = useState("");
+  // Extract productId from the URL using useParams hook
+  const { productId } = useParams();
+
+  // Find the product from the products array
+  const selectedProduct = products.find((product) => product._id === productId);
+
+  // If no product is found, show a "Sorry, no product available" message
+  const similarProduct = products
+    .filter((product) => product._id !== productId)
+    .slice(0, 4); // Get similar products (excluding the selected one)
+
+  const [mainImage, setMainImage] = useState(
+    selectedProduct ? selectedProduct.images[0].url : ""
+  );
   const [selectedSize, setSelectedSize] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [isButtonDisable, setIsButtonDisable] = useState(false);
-
-  const selectedProducts = products.slice(-1)[0];
-  const similarProduct = products.slice(0, 4);
 
   const handleQuantityChange = (action) => {
     if (action === "plus") {
@@ -44,74 +55,75 @@ const ProductDetails = () => {
     }, 1000);
   };
 
-  return (
-    <div className="container mx-auto  mt-10 ">
-      <div className=" flex flex-col md:flex-row  ">
-        {/* left side */}
+  if (!selectedProduct) {
+    return (
+      <div className="container mx-auto mt-10">
+        <p className="text-center text-xl font-semibold">
+          Sorry, no product available
+        </p>
+        {/* Show "You may like" section if no product is found */}
+        <div className="mt-20">
+          <h2 className="text-2xl text-center font-medium mb-2">
+            Products you may like
+          </h2>
+          {similarProduct.length > 0 ? (
+            <ProductGrid products={similarProduct} />
+          ) : (
+            <p className="text-center text-lg">No similar products available</p>
+          )}
+        </div>
+      </div>
+    );
+  }
 
-        <div className="hidden md:flex flex-col mr-6 space-y-4  ">
-          {selectedProducts.images.map((image, index) => (
+  return (
+    <div className="container mx-auto mt-10">
+      <div className="flex flex-col md:flex-row">
+        {/* Left Side - Image Thumbnails */}
+        <div className="hidden md:flex flex-col mr-6 space-y-4">
+          {selectedProduct.images.map((image, index) => (
             <img
               onClick={() => setMainImage(image.url)}
               key={index}
               src={image.url}
               alt={image.altText}
               className={`${
-                image.url === mainImage && "border-2 border-black"
-              }   h-20 w-20 object-cover rounded-lg cursor-pointer `}
+                image.url === mainImage ? "border-2 border-black" : ""
+              } h-20 w-20 object-cover rounded-lg cursor-pointer`}
             />
           ))}
         </div>
 
-        {/* main image  */}
-
+        {/* Main Image */}
         <div className="md:w-1/2">
-          <div className="mb-4 ">
+          <div className="mb-4">
             <img
-              src={mainImage || selectedProducts.images[0].url}
-              alt={selectedProducts.images[0].altText || selectedProducts.name}
+              src={mainImage || selectedProduct.images[0].url}
+              alt={selectedProduct.images[0].altText || selectedProduct.name}
               className="w-full h-auto object-cover rounded-lg"
             />
           </div>
         </div>
 
-        {/* Mobile Thumbnail */}
-
-        <div className="md:hidden flex overscroll-x-scroll space-x-4">
-          {selectedProducts.images.map((image, index) => (
-            <div key={index} className="">
-              <img
-                onClick={() => setMainImage(image.url)}
-                src={image.url}
-                alt={image.altText}
-                className={`${
-                  image.url === mainImage && "border-2 border-black"
-                }  h-20 w-20 object-cover rounded-lg cursor-pointer `}
-              />
-            </div>
-          ))}
-        </div>
-
-        {/* Right Side */}
-
+        {/* Right Side - Product Details */}
         <div className="md:w-1/2 md:ml-10">
-          <h1 className="text-2xl md:text-3xl font-semibold mb-2 ">
-            {selectedProducts.name}
+          <h1 className="text-2xl md:text-3xl font-semibold mb-2">
+            {selectedProduct.name}
           </h1>
           <p className="text-lg text-slate-600 mb-1 line-through">
-            $ {selectedProducts.discountPrice && `${selectedProducts.price}`}
+            $ {selectedProduct.discountPrice && `${selectedProduct.price}`}
           </p>
-
           <p className="text-lg text-slate-600 mb-2">
-            $ {selectedProducts.discountPrice}
+            $ {selectedProduct.discountPrice}
           </p>
 
-          <p className="text-slate-600 mb-4 ">{selectedProducts.description}</p>
+          <p className="text-slate-600 mb-4">{selectedProduct.description}</p>
 
+          {/* Color Selection */}
           <div className="mb-4">
-            <p className="text-slate-700 ">Color: </p>
+            <p className="text-slate-700">Color: </p>
             <div className="flex gap-2 mt-2">
-              {selectedProducts.colors.map((color) => (
+              {selectedProduct.colors.map((color) => (
                 <button
                   onClick={() => setSelectedColor(color)}
                   key={color}
@@ -126,92 +138,94 @@ const ProductDetails = () => {
                 ></button>
               ))}
             </div>
+          </div>
 
-            {/* size  */}
-
-            <div className="mb-4">
-              <p className="text-slate-700 ">Sizes: </p>
-              <div className="flex gap-2 mt-2">
-                {selectedProducts.sizes.map((size) => (
-                  <button
-                    onClick={() => setSelectedSize(size)}
-                    key={size}
-                    className={` h-8 w-8 rounded  border  ${
-                      selectedSize === size && "bg-slate-700 text-white "
-                    }  `}
-                  >
-                    {size}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/*  */}
-
-            <div className="mb-6">
-              <p className="text-slate-700 ">Quantity: </p>
-
-              <div className="flex items-center space-x-4 mt-2 ">
+          {/* Size Selection */}
+          <div className="mb-4">
+            <p className="text-slate-700">Sizes: </p>
+            <div className="flex gap-2 mt-2">
+              {selectedProduct.sizes.map((size) => (
                 <button
-                  onClick={() => handleQuantityChange("minus")}
-                  className={`h-8 w-8 rounded bg-slate-200 text-lg   border   ${
-                    quantity < 2 ? "opacity-50 cursor-not-allowed" : ""
+                  onClick={() => setSelectedSize(size)}
+                  key={size}
+                  className={`h-8 w-8 rounded border ${
+                    selectedSize === size && "bg-slate-700 text-white"
                   }`}
                 >
-                  -
+                  {size}
                 </button>
-                <span className="text-lg ">{quantity}</span>
-                <button
-                  onClick={() => handleQuantityChange("plus")}
-                  className="h-8 w-8 rounded bg-slate-200 text-lg   border "
-                >
-                  +
-                </button>
-              </div>
+              ))}
             </div>
+          </div>
 
-            {/*  */}
-            <Button
-              onClick={handleAddToCart}
-              disabled={isButtonDisable}
-              className={` w-full py-1 text-md mb-4 uppercase ${
-                isButtonDisable ? " cursor-not-allowed" : ""
-              }`}
-            >
-              {isButtonDisable ? "Adding..." : "Add to Cart"}
-            </Button>
-
-            {/*  */}
-
-            <div className="mt-10 text-slate-700 ">
-              <h3 className="text-xl font-bold mb-4">Characteristics:</h3>
-              <table className="w-full text-left text-sm text-slate-600">
-                <tbody>
-                  <tr>
-                    <td className="py-1 ">Brand</td>
-                    <td className="py-1 ">{selectedProducts.brand}</td>
-                  </tr>
-                  <tr>
-                    <td className="py-1 ">Material</td>
-                    <td className="py-1 ">{selectedProducts.material}</td>
-                  </tr>
-                </tbody>
-              </table>
+          {/* Quantity Selection */}
+          <div className="mb-6">
+            <p className="text-slate-700">Quantity: </p>
+            <div className="flex items-center space-x-4 mt-2">
+              <button
+                onClick={() => handleQuantityChange("minus")}
+                className={`h-8 w-8 rounded bg-slate-200 text-lg border ${
+                  quantity < 2 ? "opacity-50 cursor-not-allowed" : ""
+                }`}
+              >
+                -
+              </button>
+              <span className="text-lg">{quantity}</span>
+              <button
+                onClick={() => handleQuantityChange("plus")}
+                className="h-8 w-8 rounded bg-slate-200 text-lg border"
+              >
+                +
+              </button>
             </div>
-            {/*  */}
+          </div>
+
+          {/* Add to Cart Button */}
+          <Button
+            onClick={handleAddToCart}
+            disabled={isButtonDisable}
+            className={`w-full py-1 text-md mb-4 uppercase ${
+              isButtonDisable ? "cursor-not-allowed" : ""
+            }`}
+          >
+            {isButtonDisable ? "Adding..." : "Add to Cart"}
+          </Button>
+
+          {/* Product Characteristics */}
+          <div className="mt-10 text-slate-700">
+            <h3 className="text-xl font-bold mb-4">Characteristics:</h3>
+            <table className="w-full text-left text-sm text-slate-600">
+              <tbody>
+                <tr>
+                  <td className="py-1">Brand</td>
+                  <td className="py-1">{selectedProduct.brand}</td>
+                </tr>
+                <tr>
+                  <td className="py-1">Material</td>
+                  <td className="py-1">{selectedProduct.material}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
-      {/* You may also like */}
 
-      <div className="mt-20">
-        <h2 className="text-2xl text-center font-medium mb-2 ">
-          You may also like
-        </h2>
-        <ProductGrid products={similarProduct} />
-      </div>
-
-      {/*  */}
+      {/* You may also like section */}
+      {similarProduct.length > 0 ? (
+        <div className="mt-20">
+          <h2 className="text-2xl text-center font-medium mb-2">
+            You may also like
+          </h2>
+          <ProductGrid products={similarProduct} />
+        </div>
+      ) : (
+        <div className="mt-20">
+          <h2 className="text-2xl text-center font-medium mb-2">
+            Products you may like
+          </h2>
+          <p className="text-center text-lg">No similar products available</p>
+        </div>
+      )}
     </div>
   );
 };

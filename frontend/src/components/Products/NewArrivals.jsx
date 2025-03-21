@@ -1,6 +1,4 @@
 import products from "@/data/products";
-import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
-import { Link } from "react-router-dom";
 import Slider from "../Common/Slider";
 
 const NewArrivals = () => {
