@@ -21,11 +21,8 @@ const CollectionPage = () => {
 
       {/* filter sidebar  */}
 
-      <div className="lg:hidden">
-        <FilterSidebarMobile />
-      </div>
 
-      <div className="hidden lg:block">
+      <div >
         <FilterSidebar />
       </div>
 
