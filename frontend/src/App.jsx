@@ -8,6 +8,7 @@ import RegisterPage from "./pages/RegisterPage";
 import ProfilePage from "./pages/ProfilePage";
 import CollectionPage from "./pages/CollectionPage";
 import ProductDetails from "./components/Products/ProductDetails";
+import CheckOutPage from "./pages/CheckOutPage";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
               path="collections/:collection"
               element={<CollectionPage />}
             />
+            <Route path="checkout" element={<CheckOutPage />} />
             {/* Route for product details page with dynamic productId */}
             <Route path="product/:productId" element={<ProductDetails />} />
           </Route>
@@ -39,11 +41,3 @@ function App() {
 }
 
 export default App;
-
-
-
-
-
-
-
- 
