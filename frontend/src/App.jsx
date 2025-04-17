@@ -9,6 +9,7 @@ import ProfilePage from "./pages/ProfilePage";
 import CollectionPage from "./pages/CollectionPage";
 import ProductDetails from "./components/Products/ProductDetails";
 import CheckOutPage from "./pages/CheckOutPage";
+import AdminLayout from "./components/Admin/AdminLayout";
 
 function App() {
   return (
@@ -31,7 +32,8 @@ function App() {
           </Route>
 
           {/* admin layout */}
-          <Route></Route>
+          <Route path="/admin" element={<AdminLayout />}>
+          </Route>
         </Routes>
 
         <Toaster position="top-right" />
