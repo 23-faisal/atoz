@@ -14,6 +14,7 @@ import AdminHomePage from "./pages/AdminHomePage";
 import AdminUserManagement from "./pages/AdminUserManagement";
 import AdminProductsManagement from "./pages/AdminProductsManagement";
 import AdminEditProductPage from "./pages/AdminEditProductPage";
+import AdminOrderManagementPage from "./pages/AdminOrderManagementPage";
 
 function App() {
   return (
@@ -44,7 +45,8 @@ function App() {
               path="products/:productId/edit"
               element={<AdminEditProductPage />}
             />
-            <Route path="shop" element={<div>Shop</div>} />
+            <Route path="orders" element={<AdminOrderManagementPage />} />
+            <Route path="shop" element={<div>Shop </div>} />
           </Route>
         </Routes>
 
