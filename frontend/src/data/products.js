@@ -533,7 +533,7 @@ const products = [
     category: "Accessories",
     brand: "Classic Leather",
     sizes: ["One Size"],
-    colors: [  "Black"],
+    colors: ["Black"],
     collections: "Men's Accessories",
     material: "Genuine Leather",
     gender: "Men",

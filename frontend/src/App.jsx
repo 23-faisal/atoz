@@ -13,6 +13,7 @@ import AdminLayout from "./components/Admin/AdminLayout";
 import AdminHomePage from "./pages/AdminHomePage";
 import AdminUserManagement from "./pages/AdminUserManagement";
 import AdminProductsManagement from "./pages/AdminProductsManagement";
+import AdminEditProductPage from "./pages/AdminEditProductPage";
 
 function App() {
   return (
@@ -39,7 +40,10 @@ function App() {
             <Route index element={<AdminHomePage />} />
             <Route path="users" element={<AdminUserManagement />} />
             <Route path="products" element={<AdminProductsManagement />} />
-            <Route path="orders" element={<div>Orders</div>} />
+            <Route
+              path="products/:productId/edit"
+              element={<AdminEditProductPage />}
+            />
             <Route path="shop" element={<div>Shop</div>} />
           </Route>
         </Routes>
