@@ -11,6 +11,7 @@ import ProductDetails from "./components/Products/ProductDetails";
 import CheckOutPage from "./pages/CheckOutPage";
 import AdminLayout from "./components/Admin/AdminLayout";
 import AdminHomePage from "./pages/AdminHomePage";
+import AdminUserManagement from "./pages/AdminUserManagement";
 
 function App() {
   return (
@@ -34,8 +35,8 @@ function App() {
 
           {/* admin layout */}
           <Route path="/admin" element={<AdminLayout />}>
-          <Route index element={<AdminHomePage />} />
-            <Route path="users" element={<div>Users</div>} />
+            <Route index element={<AdminHomePage />} />
+            <Route path="users" element={<AdminUserManagement />} />
             <Route path="products" element={<div>Products</div>} />
             <Route path="orders" element={<div>Orders</div>} />
             <Route path="shop" element={<div>Shop</div>} />
