@@ -4,6 +4,7 @@ import cors from "cors";
 import connectMongoDB from "./config/connectDB.js";
 import userRouter from "./routes/user.route.js";
 import errorHandler from "./utils/errorHandler.js";
+import productsRouter from "./routes/product.route.js";
 
 const app = express();
 
@@ -20,8 +21,11 @@ app.get("/", (req, res) => {
 });
 
 // API routes
-
+// @api/users
 app.use("/api/users", userRouter);
+
+// @api/products
+app.use("/api/products", productsRouter);
 
 // 404 error handler
 

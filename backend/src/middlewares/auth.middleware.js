@@ -15,7 +15,7 @@ const authMiddleware = async (req, res, next) => {
       });
     }
 
-    const token = authHeader && authHeader.split(" ")[2];
+    const token = authHeader && authHeader.split(" ")[1];
 
     
 

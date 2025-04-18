@@ -1,7 +1,6 @@
 const errorHandler = (statusCode, message) => {
-  const error = new Error();
-  error.message = err.message || "Internal Server Error";
-  error.statusCode = err.statusCode || 500;
+  const error = new Error(message || "Internal Server Error");
+  error.statusCode = statusCode || 500;
   return error;
 };
 
