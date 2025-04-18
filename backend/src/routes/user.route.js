@@ -1,5 +1,9 @@
 import { Router } from "express";
-import registerUser from "../controllers/user.controller.js";
+import registerUser, {
+  getUserProfile,
+  loginUser,
+} from "../controllers/user.controller.js";
+import authMiddleware from "../middlewares/auth.middleware.js";
 
 const userRouter = Router();
 
@@ -10,3 +14,11 @@ export default userRouter;
 // register user
 
 userRouter.post("/register", registerUser);
+
+// login user
+
+userRouter.post("/login", loginUser);
+
+ 
+
+ 
