@@ -2,11 +2,12 @@ import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import "dotenv/config";
 import jwt from "jsonwebtoken";
+import errorHandler from "../utils/errorHandler.js";
 
 // @desc    Register user
 // @route   POST /api/users/register
 
-const registerUser = async (req, res) => {
+const registerUser = async (req, res, next) => {
   const { name, email, password } = req.body;
   try {
     if (!name || !email || !password) {
@@ -70,18 +71,14 @@ const registerUser = async (req, res) => {
         token,
       });
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: "Internal server error",
-      error: error.message,
-    });
+    next(errorHandler(error.statusCode, error.message));
   }
 };
 
 // @desc    Login user
 // @route   POST /api/users/login
 
-const loginUser = async (req, res) => {
+const loginUser = async (req, res, next) => {
   const { email, password } = req.body;
 
   try {
@@ -142,11 +139,7 @@ const loginUser = async (req, res) => {
         token,
       });
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: "Internal server error",
-      error: error.message,
-    });
+    next(errorHandler(error.statusCode, error.message));
   }
 };
 
@@ -154,7 +147,7 @@ const loginUser = async (req, res) => {
 // @route   GET /api/users/profile
 // @access  Private
 
-const getUserProfile = async (req, res) => {
+const getUserProfile = async (req, res, next) => {
   try {
     const user = req.user;
     if (!user) {
@@ -174,11 +167,7 @@ const getUserProfile = async (req, res) => {
       },
     });
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: "Internal server error",
-      error: error.message,
-    });
+    next(errorHandler(error.statusCode, error.message));
   }
 };
 
