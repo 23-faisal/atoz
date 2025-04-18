@@ -2,6 +2,7 @@ import express from "express";
 import "dotenv/config";
 import cors from "cors";
 import connectMongoDB from "./config/connectDB.js";
+import userRouter from "./routes/user.route.js";
 
 const app = express();
 
@@ -16,6 +17,10 @@ app.get("/", (req, res) => {
     message: "Welcome to the backend server",
   });
 });
+
+// API routes
+
+app.use("/api/users", userRouter);
 
 app.listen(port, async () => {
   console.log(`${process.env.NODE_ENV} server is running at port ${port}`);
