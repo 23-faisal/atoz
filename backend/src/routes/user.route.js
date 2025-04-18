@@ -19,6 +19,6 @@ userRouter.post("/register", registerUser);
 
 userRouter.post("/login", loginUser);
 
- 
+// profile
 
- 
+userRouter.get("/profile", authMiddleware, getUserProfile);

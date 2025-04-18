@@ -4,8 +4,27 @@ import User from "../models/user.model.js";
 
 const authMiddleware = async (req, res, next) => {
   try {
+
     const authHeader = req.headers["authorization"];
-    const token = authHeader && authHeader.split(" ")[1];
+   
+
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      return res.status(401).json({
+        success: false,
+        message: "Authorization header missing or malformed",
+      });
+    }
+
+    const token = authHeader && authHeader.split(" ")[2];
+
+    
+
+    if (!token) {
+      return res.status(401).json({
+        success: false,
+        message: "Token missing",
+      });
+    }
 
     // verify token
 
@@ -23,9 +42,9 @@ const authMiddleware = async (req, res, next) => {
     }
 
     req.user = user;
-
     next();
   } catch (error) {
+    console.error("Auth error:", error.message);
     return res.status(403).json({
       success: false,
       message: "Unauthorized",
