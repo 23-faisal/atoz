@@ -2,6 +2,7 @@ import { Router } from "express";
 import authMiddleware from "../middlewares/auth.middleware.js";
 import createNewProduct from "../controllers/products/createNewProduct.controller.js";
 import isAdmin from "../middlewares/isAdmin.middleware.js";
+import editProduct from "../controllers/products/editProduct.controller.js";
 
 const productsRouter = Router();
 
@@ -30,5 +31,9 @@ productsRouter.post(
   isAdmin,
   createNewProduct
 );
+
+// edit a product
+
+productsRouter.put("/edit-product/:id", authMiddleware, isAdmin, editProduct);
 
 export default productsRouter;
