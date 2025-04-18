@@ -3,6 +3,7 @@ import authMiddleware from "../middlewares/auth.middleware.js";
 import createNewProduct from "../controllers/products/createNewProduct.controller.js";
 import isAdmin from "../middlewares/isAdmin.middleware.js";
 import editProduct from "../controllers/products/editProduct.controller.js";
+import deleteProduct from "../controllers/products/deleteProduct.controller.js";
 
 const productsRouter = Router();
 
@@ -35,5 +36,14 @@ productsRouter.post(
 // edit a product
 
 productsRouter.put("/edit-product/:id", authMiddleware, isAdmin, editProduct);
+
+// delete a product
+
+productsRouter.delete(
+  "/delete-product/:id",
+  authMiddleware,
+  isAdmin,
+  deleteProduct
+);
 
 export default productsRouter;
