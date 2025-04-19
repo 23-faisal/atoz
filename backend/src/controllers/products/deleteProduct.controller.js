@@ -1,7 +1,7 @@
 import Product from "../../models/product.model.js";
 import errorHandler from "../../utils/errorHandler.js";
 
-const deleteProduct = async (req, res) => {
+const deleteProduct = async (req, res, next) => {
   try {
     const productId = req.params.id;
     if (!productId) {

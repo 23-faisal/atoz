@@ -4,25 +4,14 @@ import createNewProduct from "../controllers/products/createNewProduct.controlle
 import isAdmin from "../middlewares/isAdmin.middleware.js";
 import editProduct from "../controllers/products/editProduct.controller.js";
 import deleteProduct from "../controllers/products/deleteProduct.controller.js";
+import getAllProducts from "../controllers/products/getAllProduct.controller.js";
 
 const productsRouter = Router();
 
-// route @api/products/
-// get all products
+// route @api/products/all-products
+// @desc get all products
 
-productsRouter.get("/", authMiddleware, (req, res) => {
-  // Mock data for products
-  const products = [
-    { id: 1, name: "Product 1", price: 100 },
-    { id: 2, name: "Product 2", price: 200 },
-    { id: 3, name: "Product 3", price: 300 },
-  ];
-
-  res.status(200).json({
-    success: true,
-    data: products,
-  });
-});
+productsRouter.get("/all-products/", authMiddleware, getAllProducts);
 
 // create a new product
 
