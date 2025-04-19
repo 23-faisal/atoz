@@ -6,6 +6,7 @@ import editProduct from "../controllers/products/editProduct.controller.js";
 import deleteProduct from "../controllers/products/deleteProduct.controller.js";
 import getAllProducts from "../controllers/products/getAllProduct.controller.js";
 import getSingleProductById from "../controllers/products/singleProduct.controller.js";
+import getSimilarProduct from "../controllers/products/getSimilarProduct.controller.js";
 
 const productsRouter = Router();
 
@@ -17,6 +18,10 @@ productsRouter.get("/all-products/", getAllProducts);
 // get single product by id
 
 productsRouter.get("/:id", getSingleProductById);
+
+// get similar product
+
+productsRouter.get("/similar-product/:id", getSimilarProduct);
 
 // create a new product
 
