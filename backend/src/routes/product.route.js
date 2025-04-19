@@ -7,6 +7,7 @@ import deleteProduct from "../controllers/products/deleteProduct.controller.js";
 import getAllProducts from "../controllers/products/getAllProduct.controller.js";
 import getSingleProductById from "../controllers/products/singleProduct.controller.js";
 import getSimilarProduct from "../controllers/products/getSimilarProduct.controller.js";
+import getBestSellerProduct from "../controllers/products/getBestSellerProduct.controller.js";
 
 const productsRouter = Router();
 
@@ -14,6 +15,10 @@ const productsRouter = Router();
 // @desc get all products
 
 productsRouter.get("/all-products/", getAllProducts);
+
+// get best seller product
+
+productsRouter.get("/best-seller", getBestSellerProduct);
 
 // get single product by id
 
