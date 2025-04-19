@@ -8,6 +8,7 @@ import getAllProducts from "../controllers/products/getAllProduct.controller.js"
 import getSingleProductById from "../controllers/products/singleProduct.controller.js";
 import getSimilarProduct from "../controllers/products/getSimilarProduct.controller.js";
 import getBestSellerProduct from "../controllers/products/getBestSellerProduct.controller.js";
+import getNewArrivalsProduct from "../controllers/products/newArrivalsProduct.controller.js";
 
 const productsRouter = Router();
 
@@ -20,13 +21,13 @@ productsRouter.get("/all-products/", getAllProducts);
 
 productsRouter.get("/best-seller", getBestSellerProduct);
 
-// get single product by id
-
-productsRouter.get("/:id", getSingleProductById);
-
 // get similar product
 
 productsRouter.get("/similar-product/:id", getSimilarProduct);
+
+// new arrivals product
+
+productsRouter.get("/new-arrivals", getNewArrivalsProduct);
 
 // create a new product
 
@@ -49,5 +50,9 @@ productsRouter.delete(
   isAdmin,
   deleteProduct
 );
+
+// get single product by id
+
+productsRouter.get("/:id", getSingleProductById);
 
 export default productsRouter;
